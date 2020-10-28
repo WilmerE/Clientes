@@ -10,34 +10,33 @@ import java.sql.*;
 
 public class ServicioConsultas extends Conexion {
 
-    Connection con;
+    private Connection conexion;
     PreparedStatement pstm;
     ResultSet rs;
         
     public ResultSet SelectServicio(){
         try{
-            String consulta = "SELECT * FROM servicio";
-            pstm = getConexion().prepareStatement(consulta);
-            rs = pstm.executeQuery(consulta);
+            this.conexion = getConexion();
+            String sql = "SELECT * FROM servicio";
+            pstm = this.conexion.prepareStatement(sql);
+            rs = pstm.executeQuery(sql);
         } catch(Exception ex){
              Logger.getLogger(ServicioConsultas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;
     }
 
-    public boolean InsertServicio(String nombre, String estado){
+    public boolean InsertServicio(String nombre, String codigo){
+
         int resultUpdate=0;
         
         try{
-            con = getConexion();
-            String sql = "INSERT INTO `turnero`.`modulo` (`nombre`,`estado`, `descripcion`, `tipo_modulo_id`, `accion`) VALUES (?, ?, ?, ?, ?)"; 
-            pstm= con.prepareStatement(sql);
+            this.conexion = getConexion();
+            String sql = "INSERT INTO 'servicio' ('nombre', 'codigo') VALUES (?, ?)"; 
+            pstm= this.conexion.prepareStatement(sql);
             
             pstm.setString(1, nombre);
-            pstm.setString(2, estado);
-            pstm.setString(3, descripcion);
-            pstm.setString(4, tipo_modulo);
-            pstm.setString(5, "Disponible");
+            pstm.setString(2, codigo);
             
             resultUpdate= pstm.executeUpdate();
         
@@ -56,35 +55,26 @@ public class ServicioConsultas extends Conexion {
         }
     }
 
-    public ResultSet BuscarServicio(String cod_modulo) {   
+    public ResultSet BuscarServicio(String servicio_id) {   
         try {
-
-             String sql = "select * from modulo where id= ?";
-
-             pstm = getConexion().prepareStatement(sql);
-            pstm.setString(1, cod_modulo);
+            String sql = "select * from servicio where id= ?";
+            pstm = getConexion().prepareStatement(sql);
+            pstm.setString(1, servicio_id);
             consulta = pstm.executeQuery();
-
         }catch (SQLException e) {
             System.out.println("ERROR EN CONSULTA " + e);
         }
          return consulta;
     }
 
-    public boolean UpdateServicio(int cod_modulo,String nombre,String estado,String descripcion) {   
+    public boolean UpdateServicio(String nombre, String codigo) {   
         try {
-
-             String sql = "update modulo set nombre = ?, estado= ?, descripcion = ? where id = ?";
-
-             pstm = getConexion().prepareStatement(sql);
+            String sql = "update servicio set nombre = ?, codigo= ? where id = ?";
+            pstm = getConexion().prepareStatement(sql);
             pstm.setString(1, nombre);
-            pstm.setString(2, estado);
-            pstm.setString(3, descripcion);
-            
+            pstm.setString(2, codigo);
             pstm.executeUpdate();
-
-             return true;
-
+            return true;
          } catch (SQLException e) {
             System.out.println("ERROR EN CONSULTA " + e);
         }
@@ -101,10 +91,9 @@ public class ServicioConsultas extends Conexion {
         }     
     }
     
-    
     public static void main(String args[]){
-        System.out.println("lib.ConsultasModulo.main()");
-        ConsultasModulo co=new ConsultasModulo();
-        co.registrar("TEst1", "DEscrip", "ee", "1");
+        System.out.println("lib.ServicioConultas.main()");
+        ServicioConultas conn = new ServicioConultas();
+        conn.registrar("Conexion", "Ext1");
     }
 }  
