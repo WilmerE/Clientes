@@ -35,16 +35,16 @@ public class ServicioUpdate extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             //Capturamos los campos por medio de request
-            int servicio_cod = Integer.parseInt(request.getParameter("cod"));
+            int servicio_id = Integer.parseInt(request.getParameter("id"));
             String nombre=request.getParameter("NomServ");
             String codigo=request.getParameter("CodServ");
              
             ServicioConsultas consulta = new ServicioConsultas();
             
-            if (consulta.UpdateServicio(nombre, codigo, servicio_cod)) {
+            if (consulta.UpdateServicio(nombre, codigo, servicio_id)) {
                 response.sendRedirect("vistas/TipoServicio/Lista.jsp?succes=true");
             }else{
-                response.sendRedirect("vistas/TipoServicio/Editar.jsp?cod="+servicio_cod+"&error=true");               
+                response.sendRedirect("vistas/TipoServicio/Editar.jsp?id="+servicio_id+"&error=true");               
             }
         }
     }

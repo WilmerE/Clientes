@@ -16,8 +16,8 @@
     <body>
         <%! ServicioConsultas conexion = new ServicioConsultas();%>
         <%
-            int servicio_cod = Integer.parseInt(request.getParameter("cod"));
-            conexion.DeleteServicio(servicio_cod);
+            int servicio_id = Integer.parseInt(request.getParameter("id"));
+            conexion.DeleteServicio(servicio_id);
             response.sendRedirect("Lista.jsp?succes=True");
         %>
     </body>

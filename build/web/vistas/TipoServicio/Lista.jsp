@@ -45,12 +45,12 @@
                     <td> <%= Servicios.getString("nombre") %> </td>
                     <td> <%= Servicios.getString("codigo") %> </td>
                     <td align="center">
-                        <a href="Editar.jsp?cod=<%= Servicios.getInt("cod")%>" class="btn btn-primary btn-sm">
+                        <a href="Editar.jsp?id=<%= Servicios.getInt("id")%>" class="btn btn-primary btn-sm">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                     </td>
                     <td align="center">
-                        <a href="Eliminar.jsp?cod=<%= Servicios.getInt("cod")%>" class="btn btn-danger btn-sm eliminar" data-title="<%= Servicios.getString("nombre")%>">
+                        <a href="Eliminar.jsp?id=<%= Servicios.getInt("id")%>" class="btn btn-danger btn-sm eliminar" data-title="<%= Servicios.getString("nombre")%>">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>

@@ -55,14 +55,14 @@ public class ServicioConsultas extends Conexion {
         }
     }
 
-    public boolean UpdateServicio(String nombre, String codigo, int cod) {   
+    public boolean UpdateServicio(String nombre, String codigo, int id) {   
         try {
             this.conexion = getConexion();
-            String sql = "update servicio set nombre = ?, codigo= ? where cod = ?";
+            String sql = "update servicio set nombre = ?, codigo= ? where id = ?";
             this.pstm = this.conexion.prepareStatement(sql);
             this.pstm.setString(1, nombre);
             this.pstm.setString(2, codigo);
-            this.pstm.setInt(3, cod);
+            this.pstm.setInt(3, id);
             this.pstm.executeUpdate();
             return true;
          } catch (SQLException e) {
@@ -71,12 +71,12 @@ public class ServicioConsultas extends Conexion {
          return false;
     }
     
-     public ResultSet BuscarServicio(int cod) {   
+     public ResultSet BuscarServicio(int id) {   
         try {
             this.conexion = getConexion();
-            String sql = "select * from servicio where cod= ?";
+            String sql = "select * from servicio where id = ?";
             this.pstm = this.conexion.prepareStatement(sql);
-            this.pstm.setInt(1, cod);
+            this.pstm.setInt(1, id);
             this.rs = this.pstm.executeQuery();
         }catch (SQLException e) {
             System.out.println("ERROR EN CONSULTA " + e);
@@ -84,12 +84,12 @@ public class ServicioConsultas extends Conexion {
          return this.rs;
     }
      
-      public ResultSet DeleteServicio(int cod) {   
+      public ResultSet DeleteServicio(int id) {   
         try {
             this.conexion = getConexion();
-            String sql = "delete from servicio where cod= ?";
+            String sql = "delete from servicio where id = ?";
             this.pstm = this.conexion.prepareStatement(sql);
-            this.pstm.setInt(1, cod);
+            this.pstm.setInt(1, id);
             this.pstm.executeUpdate();
         }catch (SQLException e) {
             System.out.println("ERROR EN CONSULTA " + e);

@@ -25,15 +25,15 @@
             <hr>
             <form action="/Clientes/ServicioUpdate" method="post" class="form-control" style="width: 35rem; height: 30rem">
                 <%
-                    int servicio_cod = Integer.parseInt(request.getParameter("cod"));
+                    int servicio_id = Integer.parseInt(request.getParameter("id"));
                     ResultSet rs;
                     Statement st;
                     try{ 
                         st = conexion.getConexion().createStatement();
-                        rs = st.executeQuery("SELECT * FROM servicio WHERE cod= "+ servicio_cod);
+                        rs = st.executeQuery("SELECT * FROM servicio WHERE id = "+ servicio_id);
                         rs.next();  
                 %>
-                <input type="hidden" name="cod" value="<%= rs.getInt("cod") %>">
+                <input type="hidden" name="id" value="<%= rs.getInt("id") %>">
                 <label>Nuevo Nombre</label>
                 <input type="text" name="NomServ" placeholder="Nombre del servicio" value="<%= rs.getString("nombre") %>" class="form-control"><br>
                 <label>Nuevo Código</label>
