@@ -67,16 +67,17 @@ public class ServicioConsultas extends Conexion {
          return this.rs;
     }
 
-    public boolean UpdateServicio(String nombre, String codigo) {   
+    public boolean UpdateServicio(String nombre, String codigo, int cod) {   
         try {
-            String sql = "update servicio set nombre = ?, codigo= ? where id = ?";
+            String sql = "update servicio set nombre = ?, codigo= ? where cod = ?";
             this.pstm = getConexion().prepareStatement(sql);
             this.pstm.setString(1, nombre);
             this.pstm.setString(2, codigo);
+            this.pstm.setInt(3, cod);
             this.pstm.executeUpdate();
             return true;
          } catch (SQLException e) {
-            System.out.println("ERROR EN CONSULTA " + e);
+            System.out.println("ERROR EN LA CONSULTA UPDATE" + e);
         }
          return false;
     }

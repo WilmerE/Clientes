@@ -42,7 +42,6 @@ public class ServicioAdd extends HttpServlet {
             
             if(consulta.InsertServicio(nombre, codigo)){
                 response.sendRedirect("vistas/TipoServicio/Lista.jsp?succes=true");
-                
             }else{
                 response.sendRedirect("vistas/TipoServicio/Agregar.jsp?error=true");
             }

@@ -21,6 +21,9 @@
          <div class="conexiontainer">
             <div> 
                 <h1>Servicios</h1>
+                <a href="Agregar.jsp" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus"></i>
+                </a>
             </div>
             <hr>
             <table class="table table-bordered table-hover table-sm" >
@@ -39,8 +42,8 @@
                         <a href="Editar.jsp?cod=<%= Servicios.getInt("cod")%>" class="btn btn-primary btn-sm">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-                        <a href="/Clientes/vistas/TipoServicio/Agregar.jsp" class="btn btn-primary btn-sm">
-                            <i class="fas fa-plus"></i>
+                        <a href="#" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
                         </a>
                     </td>
                 </tr>
@@ -54,7 +57,7 @@
 <% if(request.getParameter("succes") != null){ %>
     <script>
         $( document ).ready(function() {
-            swal("Sistema", "Servicio Agregado Correctamente!", "success");
+            swal("Sistema", "Servicio agregado correctamente!", "success");
         });
     </script>
 <% } %>

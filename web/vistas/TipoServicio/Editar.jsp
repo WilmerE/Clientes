@@ -5,6 +5,10 @@
 --%>
 
 <%@page import="java.sql.*"%>
+<%@ page import="java.io.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.net.*"%>
+<%@ page import="java.sql.*"%>
 <%@page import="lib.ServicioConsultas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,39 +21,30 @@
     <body>
         <%! ServicioConsultas conexion = new ServicioConsultas();%>
         <div class="container">
-            <div class="container-contact100">
-                <div class="wrap-contact100">
-                    <form class="contact100-form validate-form">
-                    <%
-                        int servicio_id=Integer.parseInt(request.getParameter("cod"));
-                        ResultSet rs=null;
-                        Statement st=null;
-
-                        try{ 
-                            st = conexion.getConexion().createStatement();
-                            rs = st.executeQuery("SELECT * FROM modulo WHERE id= "+ servicio_id +"");
-                            rs.next();  
-                    %>
-                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
-                            <span class="label-input100">Nombre del Servicio</span>
-                            <input class="input100" type="text" name="nombre" placeholder="Nombre" value="<%= rs.getString("nombre") %>">
-                        </div>
-
-                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
-                            <span class="label-input100">Codigo Servicio</span>
-                            <input class="input100" type="text" name="descripcion" placeholder="Descripcion" value="<%= rs.getString("codigo") %>">
-                        </div>
-                        
-                        <div class="container-contact100-form-btn">
-                            <span class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></span>
-                            <input class="contact100-form-btn" type="submit" name="editar" placeholder="Descripcion" value="EDITAR">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <h1>Editar Servicio</h1>
+            <hr>
+            <form action="/Clientes/ServicioUpdate" method="post" class="form-control" style="width: 35rem; height: 30rem">
+                <%
+                    int servicio_cod = Integer.parseInt(request.getParameter("cod"));
+                    ResultSet rs;
+                    Statement st;
+                    try{ 
+                        st = conexion.getConexion().createStatement();
+                        rs = st.executeQuery("SELECT * FROM servicio WHERE cod= "+ servicio_cod);
+                        rs.next();  
+                %>
+                <input type="hidden" name="cod" value="<%= rs.getInt("cod") %>">
+                <label>Nuevo Nombre</label>
+                <input type="text" name="NomServ" placeholder="Nombre del servicio" value="<%= rs.getString("nombre") %>" class="form-control"><br>
+                <label>Nuevo Código</label>
+                <input type="text" name="CodServ" placeholder="Código del servicio" value="<%= rs.getString("codigo") %>" class="form-control"><br>
+                <a href="../index.html">Cancelar</a>
+                <input  class="btn btn-primary btn-lg" type="submit" name="editar" value="Editar">
+            </form>
         </div>
         <%
             }catch(Exception e){}
         %>
+    <%@include file="/js/scripts.jsp" %>
     </body>
 </html>
