@@ -18,22 +18,28 @@
         <%! ServicioConsultas conexion = new ServicioConsultas();%>
         <%  ResultSet Servicios = conexion.SelectServicio(); %>
         <main>
-         <div class="conexiontainer">
+         <div class="container"> 
             <div> 
-                <h1>Servicios</h1>
-                <a href="Agregar.jsp" class="btn btn-primary btn-sm">
-                    <i class="fas fa-plus"></i>
-                </a>
+                <h1 style="float: left;">Servicios</h1>
+                <div style="float: right; margin-top: 1rem;">
+                    <a href="Agregar.jsp" class="btn btn-primary btn-sm">
+                        Agregar registro <i class="fas fa-plus"></i>
+                    </a>
+                </div>
             </div>
-            <hr>
-            <table class="table table-bordered table-hover table-sm" >
+             <br><br><hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive"> 
+            <table id="data" class="table table-striped table-bordered" style="width:100%">
                 <thead class="thead-dark">
                     <tr>
-                        <td> Nombre</td>
-                        <td> Código de Servicio</td>
-                        <td colspan="2" align="center"><b>Opciones</b></td>
+                        <th> Nombre</th>
+                        <th> Código de Servicio</th>
+                        <th colspan="2"><b>Opciones</b></th>
                     </tr>   
                 </thead>
+                <tbody>
                 <% while (Servicios.next()) { %>
                 <tr>
                     <td> <%= Servicios.getString("nombre") %> </td>
@@ -44,14 +50,18 @@
                         </a>
                     </td>
                     <td align="center">
-                        <a href="#" class="btn btn-danger btn-sm">
+                        <a href="Eliminar.jsp?cod=<%= Servicios.getInt("cod")%>" class="btn btn-danger btn-sm">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
                 </tr>
                 <% } %>
                 <% Servicios.close(); %>
+                </tbody>
             </table>
+            </div>
+            </div>
+            </div>
         </div>
     </main>
     <%@include file="/js/scripts.jsp" %>

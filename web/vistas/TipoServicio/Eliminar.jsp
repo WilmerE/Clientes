@@ -4,6 +4,8 @@
     Author     : WPelico
 --%>
 
+<%@ page import= "java.sql.*"%>
+<%@page import="lib.ServicioConsultas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +14,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%! ServicioConsultas conexion = new ServicioConsultas();%>
+        <%
+            int servicio_cod = Integer.parseInt(request.getParameter("cod"));
+            conexion.DeleteServicio(servicio_cod);
+            response.sendRedirect("Lista.jsp");
+        %>
     </body>
 </html>

@@ -55,22 +55,11 @@ public class ServicioConsultas extends Conexion {
         }
     }
 
-    public ResultSet BuscarServicio(String servicio_id) {   
-        try {
-            String sql = "select * from servicio where id= ?";
-            this.pstm = getConexion().prepareStatement(sql);
-            this.pstm.setString(1, servicio_id);
-            this.rs = this.pstm.executeQuery();
-        }catch (SQLException e) {
-            System.out.println("ERROR EN CONSULTA " + e);
-        }
-         return this.rs;
-    }
-
     public boolean UpdateServicio(String nombre, String codigo, int cod) {   
         try {
+            this.conexion = getConexion();
             String sql = "update servicio set nombre = ?, codigo= ? where cod = ?";
-            this.pstm = getConexion().prepareStatement(sql);
+            this.pstm = this.conexion.prepareStatement(sql);
             this.pstm.setString(1, nombre);
             this.pstm.setString(2, codigo);
             this.pstm.setInt(3, cod);
@@ -80,6 +69,32 @@ public class ServicioConsultas extends Conexion {
             System.out.println("ERROR EN LA CONSULTA UPDATE" + e);
         }
          return false;
+    }
+    
+     public ResultSet BuscarServicio(int cod) {   
+        try {
+            this.conexion = getConexion();
+            String sql = "select * from servicio where cod= ?";
+            this.pstm = this.conexion.prepareStatement(sql);
+            this.pstm.setInt(1, cod);
+            this.rs = this.pstm.executeQuery();
+        }catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+         return this.rs;
+    }
+     
+      public ResultSet DeleteServicio(int cod) {   
+        try {
+            this.conexion = getConexion();
+            String sql = "delete from servicio where cod= ?";
+            this.pstm = this.conexion.prepareStatement(sql);
+            this.pstm.setInt(1, cod);
+            this.pstm.executeUpdate();
+        }catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+         return this.rs;
     }
     
     public void close(){
