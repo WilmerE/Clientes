@@ -18,8 +18,8 @@ import lib.ServicioConsultas;
  *
  * @author WPelico
  */
-@WebServlet(name = "ServicioAdd", urlPatterns = {"/ServicioAdd"})
-public class ServicioAdd extends HttpServlet {
+@WebServlet(name = "ServicioUpdate", urlPatterns = {"/ServicioUpdate"})
+public class ServicioUpdate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +35,16 @@ public class ServicioAdd extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             //Capturamos los campos por medio de request
+            int servicio_id = Integer.parseInt(request.getParameter("cod"));
             String nombre=request.getParameter("NomServ");
             String codigo=request.getParameter("CodServ");
              
             ServicioConsultas consulta = new ServicioConsultas();
             
-            if(consulta.InsertServicio(nombre, codigo)){
-                response.sendRedirect("vistas/TipoServicio/Lista.jsp?succes=true");
-                
+            if (consulta.UpdateServicio(nombre, codigo)) {
+                response.sendRedirect("vistas/modulo/Editar.jsp?cod_modulo="+servicio_id+"&success=true");
             }else{
-                response.sendRedirect("vistas/TipoServicio/Agregar.jsp?error=true");
+                response.sendRedirect("vistas/modulo/Editar.jsp?cod_modulo="+servicio_id+"&error=true");               
             }
         }
     }
