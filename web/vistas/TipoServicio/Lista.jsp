@@ -20,9 +20,6 @@
         <main>
          <div class="conexiontainer">
             <div> 
-                <a class="btn btn-primary" href="/Clientes/vistas/TipoServicio/Agregar.jsp">
-                    <i class="fas fa-plus"></i>
-                </a>
                 <h1>Servicios</h1>
             </div>
             <hr>
@@ -31,7 +28,7 @@
                     <tr>
                         <td> Nombre</td>
                         <td> Código de Servicio</td>
-                        <td colspan="2" ><b>Editar</b></td>
+                        <td colspan="2" ><b>Opciones</b></td>
                     </tr>   
                 </thead>
                 <% while (Servicios.next()) { %>
@@ -41,6 +38,9 @@
                     <td>
                         <a href="Editar.jsp?cod=<%= Servicios.getInt("cod")%>" class="btn btn-primary btn-sm">
                             <i class="fas fa-pencil-alt"></i>
+                        </a>
+                        <a href="/Clientes/vistas/TipoServicio/Agregar.jsp" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus"></i>
                         </a>
                     </td>
                 </tr>
