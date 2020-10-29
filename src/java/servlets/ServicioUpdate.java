@@ -42,9 +42,9 @@ public class ServicioUpdate extends HttpServlet {
             ServicioConsultas consulta = new ServicioConsultas();
             
             if (consulta.UpdateServicio(nombre, codigo, servicio_id)) {
-                response.sendRedirect("vistas/TipoServicio/Lista.jsp?succes=true");
+                response.sendRedirect("vistas/Servicio/Lista.jsp?succes=true");
             }else{
-                response.sendRedirect("vistas/TipoServicio/Editar.jsp?id="+servicio_id+"&error=true");               
+                response.sendRedirect("vistas/Servicio/Editar.jsp?id="+servicio_id+"&error=true");               
             }
         }
     }
