@@ -31,17 +31,19 @@
                     <tr>
                         <td> Nombre</td>
                         <td> Código de Servicio</td>
-                        <td colspan="2" ><b>Opciones</b></td>
+                        <td colspan="2" align="center"><b>Opciones</b></td>
                     </tr>   
                 </thead>
                 <% while (Servicios.next()) { %>
                 <tr>
                     <td> <%= Servicios.getString("nombre") %> </td>
                     <td> <%= Servicios.getString("codigo") %> </td>
-                    <td>
+                    <td align="center">
                         <a href="Editar.jsp?cod=<%= Servicios.getInt("cod")%>" class="btn btn-primary btn-sm">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
+                    </td>
+                    <td align="center">
                         <a href="#" class="btn btn-danger btn-sm">
                             <i class="fas fa-trash"></i>
                         </a>
@@ -57,7 +59,7 @@
 <% if(request.getParameter("succes") != null){ %>
     <script>
         $( document ).ready(function() {
-            swal("Sistema", "Servicio agregado correctamente!", "success");
+            swal("Sistema", "Consulta exitosa!", "success");
         });
     </script>
 <% } %>
