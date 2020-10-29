@@ -18,7 +18,7 @@
         <%
             int servicio_cod = Integer.parseInt(request.getParameter("cod"));
             conexion.DeleteServicio(servicio_cod);
-            response.sendRedirect("Lista.jsp");
+            response.sendRedirect("Lista.jsp?succes=True");
         %>
     </body>
 </html>

@@ -50,7 +50,7 @@
                         </a>
                     </td>
                     <td align="center">
-                        <a href="Eliminar.jsp?cod=<%= Servicios.getInt("cod")%>" class="btn btn-danger btn-sm">
+                        <a href="Eliminar.jsp?cod=<%= Servicios.getInt("cod")%>" class="btn btn-danger btn-sm eliminar" data-title="<%= Servicios.getString("nombre")%>">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
@@ -73,4 +73,21 @@
         });
     </script>
 <% } %>
+<script>
+    $( document ).ready(function() {
+        $('a.eliminar').confirm({
+            content: "Está seguro de eliminarlo?",
+        });
+        $('a.eliminar').confirm({
+            buttons: {
+                info: {
+                    btnClass: 'btn-info',
+                    action: function(){
+                        location.href = this.$target.attr('href');
+                    }
+                },
+            }
+        });
+    });
+</script>
 </html>
