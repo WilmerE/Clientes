@@ -24,7 +24,7 @@ import java.util.logging.*;
         	//Driver Postgres
             Class.forName(CLASSNAME);
             //Realizamos la conexión con las credenciales
-            con = DriverManager.getConnection(URL, username, password);
+            con = DriverManager.getConnection(URL, this.user, this.pass);
         } catch(ClassNotFoundException ex){
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }catch(Exception ex){

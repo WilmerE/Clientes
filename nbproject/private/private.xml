@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/WPelico/Documents/NetBeansProjects/Clientes/web/TipoServicio/Agregar.jsp</file>
+            <file>file:/C:/Users/WPelico/Documents/NetBeansProjects/Clientes/src/java/lib/ServicioConsultas.java</file>
             <file>file:/C:/Users/WPelico/Documents/NetBeansProjects/Clientes/web/index.html</file>
+            <file>file:/C:/Users/WPelico/Documents/NetBeansProjects/Clientes/web/vistas/TipoServicio/Agregar.jsp</file>
+            <file>file:/C:/Users/WPelico/Documents/NetBeansProjects/Clientes/src/java/servlets/ServicioAdd.java</file>
+            <file>file:/C:/Users/WPelico/Documents/NetBeansProjects/Clientes/src/java/lib/Conexion.java</file>
         </group>
     </open-files>
 </project-private>
