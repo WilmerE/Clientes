@@ -35,9 +35,9 @@
                 %>
                 <input type="hidden" name="id" value="<%= rs.getInt("id") %>">
                 <label>Nuevo Nombre</label>
-                <input type="text" name="NomServ" placeholder="Nombre del servicio" value="<%= rs.getString("nombre") %>" class="form-control"><br>
+                <input type="text" name="NomServ" placeholder="Nombre del servicio" value="<%= rs.getString("nombre") %>" class="form-control" required=""/><br>
                 <label>Nuevo Código</label>
-                <input type="text" name="CodServ" placeholder="Código del servicio" value="<%= rs.getString("codigo") %>" class="form-control"><br>
+                <input type="text" name="CodServ" placeholder="Código del servicio" value="<%= rs.getString("codigo") %>" class="form-control" required=""/><br>
                 <a href="../index.html">Cancelar</a>
                 <input  class="btn btn-primary btn-lg" type="submit" name="editar" value="Editar">
             </form>
