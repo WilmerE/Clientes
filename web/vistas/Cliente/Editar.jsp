@@ -30,7 +30,7 @@
                     Statement st;
                     try{ 
                         st = conexion.getConexion().createStatement();
-                        rs = st.executeQuery("SELECT * FROM cliente WHERE id = "+ cliente_id);
+                        rs = st.executeQuery("SELECT * FROM `cliente` WHERE id = "+ cliente_id);
                         rs.next();  
                 %>
                 <input type="hidden" name="id" value="<%= rs.getInt("id") %>">

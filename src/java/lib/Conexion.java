@@ -9,7 +9,8 @@ import java.util.logging.*;
  */
 
  public class Conexion {
-
+    
+    /* POSTGRESQL
     private Connection con;
     private String user = "postgres";
     private String pass = "root";
@@ -18,11 +19,22 @@ import java.util.logging.*;
     private String DB = "Clientes";
     private String CLASSNAME = "org.postgresql.Driver";
     private String URL = "jdbc:postgresql://"+HOST+":"+PORT+"/"+DB;
+    */
+    //MYSQL
+    private Connection con;
+    private String user = "root";
+    private String pass = "";
+    private String HOST = "localhost";
+    private String PORT = "3306";
+    private String DB = "sct";
+    private String CONF = "useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
+    private String CLASSNAME = "com.mysql.cj.jdbc.Driver";
+    private String URL = "jdbc:mysql://"+HOST+"/"+DB+"?"+CONF;
 
     public Conexion(){
         try{
-        	//Driver Postgres
-            Class.forName(CLASSNAME);
+            //Driver Postgres
+            Class.forName(CLASSNAME).newInstance();
             //Realizamos la conexión con las credenciales
             con = DriverManager.getConnection(URL, this.user, this.pass);
         } catch(ClassNotFoundException ex){

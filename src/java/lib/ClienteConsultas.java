@@ -25,7 +25,7 @@ public class ClienteConsultas extends Conexion {
     public ResultSet SelectCliente(){
         try{
             this.conexion = getConexion();
-            String sql = "SELECT * FROM cliente";
+            String sql = "SELECT * FROM `cliente`";
             this.pstm = this.conexion.prepareStatement(sql);
             this.rs = this.pstm.executeQuery();
         } catch(Exception ex){
@@ -40,7 +40,7 @@ public class ClienteConsultas extends Conexion {
         
         try{
             this.conexion = getConexion();
-            String sql = "INSERT INTO cliente (nombres, apellidos, dpi, telefono, direccion )"
+            String sql = "INSERT INTO `cliente` (nombres, apellidos, dpi, telefono, direccion )"
                     + "VALUES (?, ?, ?, ?, ?)"; 
             this.pstm= this.conexion.prepareStatement(sql);
             
@@ -70,7 +70,7 @@ public class ClienteConsultas extends Conexion {
     public boolean UpdateCliente(String nombres, String apellidos, String dpi, String telefono, String direccion, int id){   
         try {
             this.conexion = getConexion();
-            String sql = "update cliente set nombres = ?, apellidos = ?, dpi = ?, telefono = ?, direccion = ? "
+            String sql = "UPDATE `cliente` SET nombres = ?, apellidos = ?, dpi = ?, telefono = ?, direccion = ? "
                     + "where id = ?";
             this.pstm = this.conexion.prepareStatement(sql);
             this.pstm.setString(1, nombres);
@@ -91,7 +91,7 @@ public class ClienteConsultas extends Conexion {
      public ResultSet BuscarCliente(int id) {   
         try {
             this.conexion = getConexion();
-            String sql = "select * from cliente where id = ?";
+            String sql = "SELECT * FROM `cliente` where id = ?";
             this.pstm = this.conexion.prepareStatement(sql);
             this.pstm.setInt(1, id);
             this.rs = this.pstm.executeQuery();
@@ -104,7 +104,7 @@ public class ClienteConsultas extends Conexion {
       public ResultSet DeleteCliente(int id) {   
         try {
             this.conexion = getConexion();
-            String sql = "delete from cliente where id = ?";
+            String sql = "DELETE FROM `cliente` where id = ?";
             this.pstm = this.conexion.prepareStatement(sql);
             this.pstm.setInt(1, id);
             this.pstm.executeUpdate();

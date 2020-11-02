@@ -25,7 +25,7 @@ public class ProductoConsultas extends Conexion {
     public ResultSet SelectProduto(){
         try{
             this.conexion = getConexion();
-            String sql = "SELECT * FROM producto";
+            String sql = "SELECT * FROM `producto`";
             this.pstm = this.conexion.prepareStatement(sql);
             this.rs = this.pstm.executeQuery();
         } catch(Exception ex){
@@ -40,7 +40,7 @@ public class ProductoConsultas extends Conexion {
         
         try{
             this.conexion = getConexion();
-            String sql = "INSERT INTO producto (nombre, codigo) VALUES (?, ?)"; 
+            String sql = "INSERT INTO `producto` (nombre, codigo) VALUES (?, ?)"; 
             this.pstm= this.conexion.prepareStatement(sql);
             
             this.pstm.setString(1, nombre);
@@ -66,7 +66,7 @@ public class ProductoConsultas extends Conexion {
     public boolean UpdateProducto(String nombre, String codigo, int id) {   
         try {
             this.conexion = getConexion();
-            String sql = "update producto set nombre = ?, codigo= ? where id = ?";
+            String sql = "UPDATE `producto` SET nombre = ?, codigo= ? where id = ?";
             this.pstm = this.conexion.prepareStatement(sql);
             this.pstm.setString(1, nombre);
             this.pstm.setString(2, codigo);
@@ -82,7 +82,7 @@ public class ProductoConsultas extends Conexion {
      public ResultSet BuscarProducto(int id) {   
         try {
             this.conexion = getConexion();
-            String sql = "select * from producto where id = ?";
+            String sql = "SELECT * FROM `producto` where id = ?";
             this.pstm = this.conexion.prepareStatement(sql);
             this.pstm.setInt(1, id);
             this.rs = this.pstm.executeQuery();
@@ -95,7 +95,7 @@ public class ProductoConsultas extends Conexion {
       public ResultSet DeleteServicio(int id) {   
         try {
             this.conexion = getConexion();
-            String sql = "delete from producto where id = ?";
+            String sql = "DELETE FROM `producto` where id = ?";
             this.pstm = this.conexion.prepareStatement(sql);
             this.pstm.setInt(1, id);
             this.pstm.executeUpdate();
