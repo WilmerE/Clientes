@@ -34,16 +34,26 @@
                         rs.next();  
                 %>
                 <input type="hidden" name="id" value="<%= rs.getInt("id") %>">
-                <label>Editar Nombres: </label>
-                <input type="text" name="nombres" placeholder="Nombres del cliente"  value="<%= rs.getString("nombres") %>" class="form-control" required=""/><br>
-                <label>Editar Apellidos: </label>
-                <input type="text" name="apellidos" placeholder="Apellidos del cliente" value="<%= rs.getString("apellidos") %>" class="form-control" required=""/><br>
-                <label>Editar DPI: </label>
-                <input type="text" name="dpi" placeholder="DPI del clinte" value="<%= rs.getString("dpi") %>" class="form-control" required=""/><br>
-                <label>Editar Teléfono: </label>
-                <input type="text" name="telefono" placeholder="Teléfono del cliente" value="<%= rs.getString("telefono") %>" class="form-control" required=""/><br>
-                <label>Editar Dirección: </label>
-                <input type="text" name="direccion" placeholder="Direccion del cliente" value="<%= rs.getString("direccion") %>" class="form-control" required=""/></br>
+                <div class="form-group">
+                    <label>Editar Nombres: </label>
+                    <input type="text" name="nombres" placeholder="Nombres del cliente"  value="<%= rs.getString("nombres") %>" class="form-control" required=""/><br>
+                </div>
+                <div class="form-group">
+                    <label>Editar Apellidos: </label>
+                    <input type="text" name="apellidos" placeholder="Apellidos del cliente" value="<%= rs.getString("apellidos") %>" class="form-control" required=""/><br>
+                </div>
+                <div class="form-group">
+                    <label>Editar DPI: </label>
+                    <input type="text" name="dpi" placeholder="DPI del clinte" value="<%= rs.getString("dpi") %>" class="form-control" required=""/><br>
+                </div>
+                <div class="form-group">
+                    <label>Editar Teléfono: </label>
+                    <input type="text" name="telefono" placeholder="Teléfono del cliente" value="<%= rs.getString("telefono") %>" class="form-control" required=""/><br>
+                </div>
+                <div class="form-group">
+                    <label>Editar Dirección: </label>
+                    <input type="text" name="direccion" placeholder="Direccion del cliente" value="<%= rs.getString("direccion") %>" class="form-control" required=""/></br>
+                </div>
                 <a href="../index.html">Cancelar</a>
                 <input  class="btn btn-primary btn-lg" type="submit" name="editar" value="Editar">
             </form>

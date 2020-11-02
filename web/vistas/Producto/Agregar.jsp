@@ -17,10 +17,13 @@
             <h1>Registrar Producto</h1>
             <hr>
             <form action="/Clientes/ProductoAdd" method="post" class="form-control" style="width: 35rem; height: 30rem">
-                <label>Nombre: </label>
-                <input type="text" name="nombre" placeholder="Nombre del producto" class="form-control" required=""/><br>
-                <label>Código: </label>
-                <input type="text" name="codigo" placeholder="Código del producto" class="form-control" required=""/><br>
+                <div class="form-group">
+                    <label>Nombre: </label>
+                    <input type="text" name="nombre" placeholder="Nombre del producto" class="form-control" required=""/><br>
+                <div class="form-group">
+                    <label>Código: </label>
+                    <input type="text" name="codigo" placeholder="Código del producto" class="form-control" required=""/><br>
+                </div>
                 <a href="../index.html">Cancelar</a>
                 <input type="submit" value="Guardar" name="guardar" class="btn btn-primary btn-lg"/>
             </form>

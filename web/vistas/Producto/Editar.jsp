@@ -34,10 +34,13 @@
                         rs.next();  
                 %>
                 <input type="hidden" name="id" value="<%= rs.getInt("id") %>">
-                <label>Nuevo Nombre</label>
-                <input type="text" name="nombre" placeholder="Nombre del producto" value="<%= rs.getString("nombre") %>" class="form-control" required=""/><br>
-                <label>Nuevo Código</label>
-                <input type="text" name="codigo" placeholder="Código del producto" value="<%= rs.getString("codigo") %>" class="form-control" required=""/><br>
+                <div class="form-group">
+                    <label>Nuevo Nombre</label>
+                    <input type="text" name="nombre" placeholder="Nombre del producto" value="<%= rs.getString("nombre") %>" class="form-control" required=""/><br>
+                <div class="form-group">
+                    <label>Nuevo Código</label>
+                    <input type="text" name="codigo" placeholder="Código del producto" value="<%= rs.getString("codigo") %>" class="form-control" required=""/><br>
+                </div>
                 <a href="../index.html">Cancelar</a>
                 <input  class="btn btn-primary btn-lg" type="submit" name="editar" value="Editar">
             </form>

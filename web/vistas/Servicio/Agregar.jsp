@@ -17,10 +17,14 @@
             <h1>Registrar Servicio</h1>
             <hr>
             <form action="/Clientes/ServicioAdd" method="post" class="form-control" style="width: 35rem; height: 30rem">
-                <label>Nombre: </label>
-                <input type="text" name="NomServ" placeholder="Nombre del servicio" class="form-control" required=""/><br>
-                <label>Código: </label>
-                <input type="text" name="CodServ" placeholder="Código del servicio" class="form-control" required=""/><br>
+                <div class="form-group">
+                    <label>Nombre: </label>
+                    <input type="text" name="NomServ" placeholder="Nombre del servicio" class="form-control" required=""/><br>
+                </div>
+                <div class="form-group">
+                    <label>Código: </label>
+                    <input type="text" name="CodServ" placeholder="Código del servicio" class="form-control" required=""/><br>
+                </div>
                 <a href="../index.html">Cancelar</a>
                 <input type="submit" value="Guardar" name="guardar" class="btn btn-primary btn-lg"/>
             </form>

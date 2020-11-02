@@ -17,16 +17,26 @@
             <h1>Registrar Cliente</h1>
             <hr>
             <form action="/Clientes/ClienteAdd" method="post" class="form-control" style="width: 35rem; min-height: 32rem">
-                <label>Nombres: </label>
-                <input type="text" name="nombres" placeholder="Nombres del cliente" class="form-control" required=""/><br>
-                <label>Apellidos: </label>
-                <input type="text" name="apellidos" placeholder="Apellidos del cliente" class="form-control" required=""/><br>
-                <label>DPI: </label>
-                <input type="text" name="dpi" placeholder="DPI del cleinte" class="form-control" required=""/><br>
-                <label>Teléfono: </label>
-                <input type="text" name="telefono" placeholder="Teléfono del cliente" class="form-control" required=""/><br>
-                <label>Dirección: </label>
-                <input type="text" name="direccion" placeholder="Direccion del cliente" class="form-control" required=""/><br>
+                <div class="form-group">
+                    <label>Nombres: </label>
+                    <input type="text" name="nombres" placeholder="Nombres del cliente" class="form-control" required=""/><br>
+                </div>
+                <div class="form-group">
+                    <label>Apellidos: </label>
+                    <input type="text" name="apellidos" placeholder="Apellidos del cliente" class="form-control" required=""/><br>
+                </div>
+                <div class="form-group">
+                    <label>DPI: </label>
+                    <input type="text" name="dpi" placeholder="DPI del cleinte" class="form-control" required=""/><br>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono: </label>
+                    <input type="text" name="telefono" placeholder="Teléfono del cliente" class="form-control" required=""/><br>
+                </div>
+                <div class="form-group">
+                    <label>Dirección: </label>
+                    <input type="text" name="direccion" placeholder="Direccion del cliente" class="form-control" required=""/><br>
+                </div>
                 <a href="../index.html">Cancelar</a>
                 <input type="submit" value="Guardar" name="guardar" class="btn btn-primary btn-lg"/>
             </form>
