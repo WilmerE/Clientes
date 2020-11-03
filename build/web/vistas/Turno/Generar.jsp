@@ -19,7 +19,7 @@
         <main>
             <div class="caja">
                 <form action="/Clientes/TurnoCreate" method="post">
-                    <img src="../../img/electrocomp-mono.png" width="60%">
+                    <img src="../../img/electrocomp-mono.png" width="60%" class="logo">
                     <div class="caja-header">
                         <h1>¡BIENVENIDO!</h1>
                         <h4>Seleccione el tipo de atención que desea.</h4>
