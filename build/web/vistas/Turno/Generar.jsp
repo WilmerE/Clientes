@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="servlets.TurnoCreate"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +18,7 @@
     <body>
         <main>
             <div class="caja">
-                <form>
+                <form action="/Clientes/TurnoCreate" method="post">
                     <img src="../../img/electrocomp-mono.png" width="60%">
                     <div class="caja-header">
                         <h1>¡BIENVENIDO!</h1>
@@ -35,5 +36,19 @@
             </div>
         </main>
         <%@include file="/js/scripts.jsp" %>
+        <% if(request.getParameter("succes") != null){ %>
+            <script>
+                $( document ).ready(function() {
+                    swal("Sistema", "Turno Generado!", "success");
+                });
+            </script>
+        <% } %>
+        <% if(request.getParameter("error") != null){ %>
+            <script>
+                $( document ).ready(function() {
+                    swal("Turnero", "Turno no generado", "error");
+                });
+            </script>
+        <% } %>
     </body>
 </html>

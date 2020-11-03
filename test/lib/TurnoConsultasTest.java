@@ -29,7 +29,7 @@ public class TurnoConsultasTest {
     @Test
     public void testInsertTurno() {
         System.out.println("InsertTurno");
-        String tipoServicio = "producto";
+        String tipoServicio = "servicio";
         TurnoConsultas instance = new TurnoConsultas();
         boolean expResult = true;
         boolean result = instance.InsertTurno(tipoServicio);
