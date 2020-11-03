@@ -14,23 +14,25 @@ and open the template in the editor.
 }
 html,body {
   height: 100%;
+  background-color: #f7f7f7;
 }
 .header{
     position: relative;
     width: 100%;
     text-align: center;
+    background-color: #155977;
 }
 aside {
     float: right;
-    width: 40%;
+    width: 50%;
     height: 100%;
     position: relative;
     max-width: 1000px;
     margin: auto;
 }
 .widget {
-    width: 90%;
-    height: 70%;
+    width: 75%;
+    height: 65%;
     position: absolute;
     color: #fff;
     top: 0;

@@ -15,7 +15,7 @@
     </head>
     <body>
         <div class="header">
-            <img src="../../img/electrocomp-2.png" width="30%" class="logo">
+            <img src="../../img/electrocomp-mono.png" width="30%" class="logo">
         </div>
         <section>
             <div></div>
