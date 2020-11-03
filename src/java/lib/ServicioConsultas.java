@@ -23,7 +23,7 @@ public class ServicioConsultas extends Conexion {
         } catch(Exception ex){
              Logger.getLogger(ServicioConsultas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return rs;
+        return this.rs;
     }
 
     public boolean InsertServicio(String nombre, String codigo){
@@ -40,13 +40,13 @@ public class ServicioConsultas extends Conexion {
             
             resultUpdate= this.pstm.executeUpdate();
         
-        if(resultUpdate !=0){
-            this.pstm.close();
-            return true;
-        }else{
-            this.pstm.close();
-            return false;
-        }
+            if(resultUpdate !=0){
+                this.pstm.close();
+                return true;
+            }else{
+                this.pstm.close();
+                return false;
+            }
         
         }catch (Exception ex){
             System.out.println("Error en la base de datos.");
@@ -101,7 +101,7 @@ public class ServicioConsultas extends Conexion {
         try {
           if(getConexion() != null) getConexion().close();
           if(this.pstm != null ) this.pstm.close();
-          if(rs != null ) rs.close();
+          if(this.rs != null ) this.rs.close();
         } catch (Exception ex) {
           Logger.getLogger(ServicioConsultas.class.getName()).log(Level.SEVERE, null, ex);
         }     

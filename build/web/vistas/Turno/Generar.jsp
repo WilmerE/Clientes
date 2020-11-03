@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control select" name="tipo-atecion" id="tipo-atecion">
-                            <option selected>Click seleccionar</option>
+                            <option selected>Click para seleccionar</option>
                             <option value="servicio">Servicio</option>
                             <option value="producto">Producto</option>
                         </select>

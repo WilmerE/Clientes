@@ -31,7 +31,7 @@ public class ClienteConsultas extends Conexion {
         } catch(Exception ex){
              Logger.getLogger(ServicioConsultas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return rs;
+        return this.rs;
     }
     
     public boolean InsertCliente(String nombres, String apellidos, String dpi, String telefono, String direccion){
@@ -118,7 +118,7 @@ public class ClienteConsultas extends Conexion {
         try {
           if(getConexion() != null) getConexion().close();
           if(this.pstm != null ) this.pstm.close();
-          if(rs != null ) rs.close();
+          if(this.rs != null ) this.rs.close();
         } catch (Exception ex) {
           Logger.getLogger(ServicioConsultas.class.getName()).log(Level.SEVERE, null, ex);
         }     

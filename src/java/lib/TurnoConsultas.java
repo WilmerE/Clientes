@@ -5,6 +5,7 @@
  */
 package lib;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -15,15 +16,60 @@ import java.sql.ResultSet;
 public class TurnoConsultas extends Conexion {
     
     private String turno="";
+    private Connection conexion;
+    private PreparedStatement pstm;
+    private ResultSet rs;
     
-    public String InsertTurno(String TipodeAtencion) {
+    public boolean InsertTurno(String tipoServicio) {
         
-        int NumerodeTurno= 0;
+        int numerodeTurno;
+        int resultUpdate=0;
+        String codigo = null;
 
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        int puntaje = 0;
-        
-        return "";
+        try{
+            if (tipoServicio.equals("servicio")){
+                String cantidadTurnos = "SELECT COUNT(*) AS total FROM `turno` WHERE tipo_de_servicio= ?";
+                pstm = getConexion().prepareCall(cantidadTurnos);
+                this.pstm.setString(1, tipoServicio);
+                this.rs = this.pstm.executeQuery();
+                rs.next();
+                numerodeTurno = this.rs.getInt("total");
+                System.out.println("======== RESULTADO DE LA CONSULTA SERVICIO ========");
+                System.out.println(numerodeTurno);
+                return true;
+            } else if (tipoServicio.equals("producto")){
+                String cantidadTurnos = "SELECT COUNT(*) AS total FROM `turno` WHERE tipo_de_servicio= ?";
+                pstm = getConexion().prepareCall(cantidadTurnos);
+                this.pstm.setString(1, tipoServicio);
+                rs = this.pstm.executeQuery();
+                rs.next();
+                numerodeTurno = this.rs.getInt("total");
+                System.out.println("======== RESULTADO DE LA CONSULTA PRODUCTO ========");
+                System.out.println(numerodeTurno);
+                return true;
+            }
+            /*
+            this.conexion = getConexion();
+            String sql = "INSERT INTO `turno` (tipo_de_servicio, codigo) VALUES (?, ?)"; 
+            this.pstm= this.conexion.prepareStatement(sql);
+            
+            this.pstm.setString(1, tipoServicio);
+            this.pstm.setString(2, codigo);
+            
+            resultUpdate= this.pstm.executeUpdate();
+            */
+            if(resultUpdate !=0){
+                this.pstm.close();
+                return true;
+            }else{
+                this.pstm.close();
+                return false;
+            }
+
+        }catch (Exception ex){
+            System.out.println("Error en la base de datos.");
+            ex.printStackTrace();
+            return false;
+        }
     }
 }

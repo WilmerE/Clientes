@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2020 a las 07:36:19
+-- Tiempo de generación: 03-11-2020 a las 05:49:03
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.8
 
@@ -45,7 +45,9 @@ INSERT INTO `cliente` (`id`, `nombres`, `apellidos`, `dpi`, `telefono`, `direcci
 (2, 'Ingrid Yamileth', 'LÃ³pez AgustÃ­n', '3362 44565 4365', '47620050', 'Esquipulas'),
 (3, 'Nelson Jacobo', 'Brenes CalderÃ³n', '3362 44123 1123', '47620050', 'Chiquimula'),
 (4, 'CÃ©sar Agusto', 'Lemus Villafuerte', '3362 44321 1321', '47620050', 'Olopa'),
-(5, 'Joseph Emmanuel', 'Velasquez Godoy', '3362 44536 1967', '47620050', 'Quezaltepeque');
+(5, 'Joseph Emmanuel', 'Velasquez Godoy', '3362 44536 1967', '47620050', 'Quezaltepeque'),
+(6, 'Claudia María', 'Vargas Flores', '3362 44657 2090', '47620050', 'Chiquimula'),
+(7, 'José Willian Junior', 'Hernández Ramírez', '3362 44657 9089', '47620050', 'Chiquimula');
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,20 @@ INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES
 (6, 'Servicio6', 'S006'),
 (7, 'Servicio7', 'S007'),
 (8, 'Servicio8', 'S008'),
-(9, 'Servicio9', 'S009');
+(9, 'Servicio9', 'S009'),
+(10, 'Servicio10', 'S010');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `turno`
+--
+
+CREATE TABLE `turno` (
+  `id` int(11) NOT NULL,
+  `tipo_de_servicio` varchar(8) NOT NULL,
+  `codigo` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -127,6 +142,13 @@ ALTER TABLE `servicio`
   ADD UNIQUE KEY `codigo` (`codigo`);
 
 --
+-- Indices de la tabla `turno`
+--
+ALTER TABLE `turno`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codigo` (`codigo`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -134,7 +156,7 @@ ALTER TABLE `servicio`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -146,7 +168,13 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `turno`
+--
+ALTER TABLE `turno`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -31,7 +31,7 @@ public class ProductoConsultas extends Conexion {
         } catch(Exception ex){
              Logger.getLogger(ServicioConsultas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return rs;
+        return this.rs;
     }
 
     public boolean InsertProducto(String nombre, String codigo){
@@ -109,7 +109,7 @@ public class ProductoConsultas extends Conexion {
         try {
           if(getConexion() != null) getConexion().close();
           if(this.pstm != null ) this.pstm.close();
-          if(rs != null ) rs.close();
+          if(this.rs != null ) this.rs.close();
         } catch (Exception ex) {
           Logger.getLogger(ServicioConsultas.class.getName()).log(Level.SEVERE, null, ex);
         }     
