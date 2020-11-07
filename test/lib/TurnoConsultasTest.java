@@ -30,9 +30,10 @@ public class TurnoConsultasTest {
     public void testInsertTurno() {
         System.out.println("InsertTurno");
         String tipoServicio = "servicio";
+        int seleccionado = 1;
         TurnoConsultas instance = new TurnoConsultas();
         boolean expResult = true;
-        boolean result = instance.InsertTurno(tipoServicio);
+        boolean result = instance.InsertTurno(tipoServicio, seleccionado);
         assertEquals(expResult, result);
     }
     

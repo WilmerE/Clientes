@@ -12,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lib.TurnoConsultas;
 
 /**
  *
  * @author WPelico
  */
-@WebServlet(name = "TurnoCreate", urlPatterns = {"/TurnoCreate"})
-public class TurnoCreate extends HttpServlet {
+@WebServlet(name = "TurnoTipo", urlPatterns = {"/TurnoTipo"})
+public class TurnoTipo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,18 +33,12 @@ public class TurnoCreate extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             String tipoAtencion=request.getParameter("tipo-atecion");
-            int seleccion_id=0;
-            
-            if (tipoAtencion.equalsIgnoreCase("servicio")){
-                seleccion_id=Integer.parseInt(request.getParameter("servicio_id"));
-            }else if (tipoAtencion.equalsIgnoreCase("producto")){
-                seleccion_id=Integer.parseInt(request.getParameter("producto_id"));
-            }
-            TurnoConsultas generar = new TurnoConsultas();
-            
-            if(generar.InsertTurno(tipoAtencion, seleccion_id)){
-                response.sendRedirect("vistas/Turno/Generar.jsp?succes=true");
+            if (tipoAtencion.equals("servicio")){
+                response.sendRedirect("vistas/Turno/ServicioSelect.jsp");
+            } else if (tipoAtencion.equals("producto")){
+                response.sendRedirect("vistas/Turno/ProductoSelect.jsp");
             }else{
                 response.sendRedirect("vistas/Turno/Generar.jsp?error=true");
             }

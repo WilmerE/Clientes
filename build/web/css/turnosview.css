@@ -75,3 +75,6 @@ footer{
     background-color: #2F3233;
     bottom: 0%
 }
+footer marquee h1{
+    padding: 0.5rem 0;
+}

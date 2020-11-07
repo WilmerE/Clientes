@@ -18,7 +18,11 @@
             <img src="../../img/electrocomp-mono.png" width="30%" class="logo">
         </div>
         <section>
-            <div></div>
+            <div>
+                <ul class="list-group">
+                    
+                </ul> 
+            </div>
         </section>
         <aside class="contenedor">
             <div class="widget">
@@ -44,12 +48,40 @@
         </aside>
         <footer>
             <marquee>
-                <h1>
-                    <label>¡Bienvenido! Por favor verifica siempre tu número de turno</label>
-                </h1>
+                <h1>Por favor verifica siempre tu número de turno. Recuerda que también contamos con lo mejores planes de pago.</h1>
             </marquee>
         </footer>
         <%@include file="/js/scripts.jsp" %>
         <script src="../../js/reloj.js"></script>
+        <script>
+        $( document ).ready(function() {
+            var turnos = [];
+            
+            window.setInterval(function(){
+                llamar_turno();
+            }, 10000);
+            
+            const button = document.querySelector("button");
+            button.addEventListener('click', playSound);
+                
+            function llamar_turno(){
+                $.ajax(
+                        '/Clientes/TurnoView'
+                ).done(function(data) {
+                    data = data.replace(",]", "]");
+                    data = JSON.parse(data).turnos;
+                    
+                    $(".list-group").empty();
+                    $.each(data, function( index, value ) {
+                        let row = "<li class=\"list-group-item\"> " + value.producto + " : " + value.turno +" </li>";
+                        $(".list-group").append(row);
+                    });
+                    turnos = data;
+                }).fail(function(jqXHR) {
+                    console.log(jqXHR.statusText);
+                });
+            }
+        });
+    </script>
     </body>
 </html>

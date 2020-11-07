@@ -28,7 +28,7 @@ public class ProductoConsultas extends Conexion {
             String sql = "SELECT * FROM `producto`";
             this.pstm = this.conexion.prepareStatement(sql);
             this.rs = this.pstm.executeQuery();
-        } catch(Exception ex){
+        } catch(SQLException ex){
              Logger.getLogger(ServicioConsultas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return this.rs;

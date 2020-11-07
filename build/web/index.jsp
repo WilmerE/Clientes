@@ -21,7 +21,7 @@
                 <div class="caja-header">
                     <img src="img/electrocomp.jpg" width="150rem">
                     <h1>Bienvenido a ElectroComp</h1>
-                    <h5>Por favor selesccione el tipo de atención que desea</h5>
+                    <h5>Por favor seleccione el tipo de atención que desea</h5>
                 </div>
                 <div class="caja-body">
                     <input type="checkbox" name="servicio" id="servicio" value="Servicio" class="btn">

@@ -8,6 +8,7 @@ package lib;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -20,7 +21,7 @@ public class TurnoConsultas extends Conexion {
     private PreparedStatement pstm;
     private ResultSet rs;
     
-    public boolean InsertTurno(String tipoServicio) {
+    public boolean InsertTurno(String tipoServicio, int seleccion) {
         
         int numerodeTurno;
         int resultUpdate=0;
@@ -31,7 +32,7 @@ public class TurnoConsultas extends Conexion {
             //Si el cliente eligió un servicio
             if (tipoServicio.equals("servicio")){
                 //Se cuenta la cantidad de servicios solicitdos
-                String cantidadTurnos = "SELECT COUNT(*) AS total FROM `turno` WHERE tipo_de_servicio= ?";
+                String cantidadTurnos = "SELECT COUNT(*) AS total FROM `turno` WHERE tipo_de_atencion= ?";
                 //Se prepara la consulta
                 pstm = this.conexion.prepareCall(cantidadTurnos);
                 //Se le da el valor a la variable temporal de la consulta, con el valor recibido del formulario
@@ -45,6 +46,17 @@ public class TurnoConsultas extends Conexion {
                 //Se genera el código para el servicio, iniciando con "SE0" + el número de turno
                 codigo += "SE00" + String.valueOf(numerodeTurno+1);
                 
+                //==================== Consulta insert ==================== 
+                String sql = "INSERT INTO `turno` (tipo_de_atencion, servicio_id, codigo) VALUES (?, ?, ?)"; 
+                //Se prepara la consulta
+                this.pstm= this.conexion.prepareStatement(sql);
+                //Asignamos valores a las variables temporales de la consulta
+                this.pstm.setString(1, tipoServicio);
+                this.pstm.setInt(2, seleccion);
+                this.pstm.setString(3, codigo);
+                //Ejecutamos consulta
+                resultUpdate= this.pstm.executeUpdate();
+                
                 /* TEST COUNT
                 //Mensajes en consola para el Test
                 System.out.println("======== RESULTADO DE LA CONSULTA SERVICIO ========");
@@ -53,13 +65,24 @@ public class TurnoConsultas extends Conexion {
                 return true;
                 */
             } else if (tipoServicio.equals("producto")){
-                String cantidadTurnos = "SELECT COUNT(*) AS total FROM `turno` WHERE tipo_de_servicio= ?";
+                String cantidadTurnos = "SELECT COUNT(*) AS total FROM `turno` WHERE tipo_de_atencion= ?";
                 pstm = this.conexion.prepareCall(cantidadTurnos);
                 this.pstm.setString(1, tipoServicio);
                 rs = this.pstm.executeQuery();
                 rs.next();
                 numerodeTurno = this.rs.getInt("total");
                 codigo += "PR00" + String.valueOf(numerodeTurno+1);
+                
+                //==================== Consulta insert ==================== 
+                String sql = "INSERT INTO `turno` (tipo_de_atencion, producto_id, codigo) VALUES (?, ?, ?)"; 
+                //Se prepara la consulta
+                this.pstm= this.conexion.prepareStatement(sql);
+                //Asignamos valores a las variables temporales de la consulta
+                this.pstm.setString(1, tipoServicio);
+                this.pstm.setInt(2, seleccion);
+                this.pstm.setString(3, codigo);
+                //Ejecutamos consulta
+                resultUpdate= this.pstm.executeUpdate();
                 
                 /* TEST COUNT
                 System.out.println("======== RESULTADO DE LA CONSULTA PRODUCTO ========");
@@ -68,15 +91,6 @@ public class TurnoConsultas extends Conexion {
                 */
             }
             
-            //Consulta insert
-            String sql = "INSERT INTO `turno` (tipo_de_servicio, codigo) VALUES (?, ?)"; 
-            //Se prepara la consulta
-            this.pstm= this.conexion.prepareStatement(sql);
-            //Asignamos valores a las variables temporales de la consulta
-            this.pstm.setString(1, tipoServicio);
-            this.pstm.setString(2, codigo);
-            //Ejecutamos consulta
-            resultUpdate= this.pstm.executeUpdate();
             //Si nuestra consulta recibe un valor diferente a 0
             if(resultUpdate !=0){
                 //Cerramos el escritor
@@ -97,5 +111,35 @@ public class TurnoConsultas extends Conexion {
             ex.printStackTrace();
             return false;
         }
+    }
+    public ResultSet PrductoTurnos(){
+        try {
+            String sql = "SELECT turno.tipo_de_atencion AS 'Atención', "
+                    + "producto.nombre AS 'Producto', "
+                    + "turno.codigo AS 'Turno' FROM producto "
+                    + "INNER JOIN turno ON producto.id = turno.producto_id";
+
+            this.pstm = getConexion().prepareStatement(sql);
+            this.rs = this.pstm.executeQuery();
+            
+            return this.rs;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+        return null;
+    }
+    public void desconectar() {
+
+        try {
+            if (this.rs != null) {
+                this.rs.close();
+            }
+            this.pstm.close();
+            getConexion().close();
+            System.out.println("Se desconecto Exitosamente");
+        } catch (SQLException error) {
+            System.out.println("ERROR EN DESCONEXION: " + error);
+        }
+
     }
 }

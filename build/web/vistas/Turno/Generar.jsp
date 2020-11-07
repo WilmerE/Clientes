@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="servlets.TurnoCreate"%>
+<%@page import="servlets.TurnoTipo"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +18,7 @@
     <body>
         <main>
             <div class="caja">
-                <form action="/Clientes/TurnoCreate" method="post">
+                <form action="/Clientes/TurnoTipo" method="post">
                     <img src="../../img/electrocomp-mono.png" width="60%" class="logo">
                     <div class="caja-header">
                         <h1>¡BIENVENIDO!</h1>
@@ -31,7 +31,7 @@
                             <option value="producto">Producto</option>
                         </select>
                     </div>
-                    <input type="submit" class="btn" value="Confirmar">
+                    <input type="submit" class="btn" value="Siguiente">
                 </form>
             </div>
         </main>
@@ -46,7 +46,7 @@
         <% if(request.getParameter("error") != null){ %>
             <script>
                 $( document ).ready(function() {
-                    swal("Turnero", "Turno no generado", "error");
+                    swal("Sistema", "Turno no generado", "error");
                 });
             </script>
         <% } %>
