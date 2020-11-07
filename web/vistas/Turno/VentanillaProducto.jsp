@@ -23,6 +23,7 @@
             </div>
         </aside>
         <section>
+            
         </section>
         <%@include file="/js/scripts.jsp" %>
         <script>

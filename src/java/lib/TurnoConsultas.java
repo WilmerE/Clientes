@@ -17,8 +17,8 @@ import java.sql.SQLException;
 public class TurnoConsultas extends Conexion {
     
     private Connection conexion;
-    private PreparedStatement pstm;
-    private ResultSet rs;
+    private PreparedStatement pstm, consultaVentanilla;
+    private ResultSet rs, ventanilla;
     
     public boolean InsertTurno(String tipoServicio, int seleccion) {
         
@@ -33,17 +33,27 @@ public class TurnoConsultas extends Conexion {
                 //Se cuenta la cantidad de servicios solicitdos
                 String cantidadTurnos = "SELECT COUNT(*) AS total FROM `turno` WHERE tipo_de_atencion= ?";
                 //Se prepara la consulta
-                pstm = this.conexion.prepareCall(cantidadTurnos);
+                this.pstm = this.conexion.prepareCall(cantidadTurnos);
                 //Se le da el valor a la variable temporal de la consulta, con el valor recibido del formulario
                 this.pstm.setString(1, tipoServicio);
                 //Ejecutamos la consulta
                 this.rs = this.pstm.executeQuery();
                 //Recorremos en este caso su única columna 
-                rs.next();
+                this.rs.next();
                 //Le asignamos el valor a nuestra variable contador
                 numerodeTurno = this.rs.getInt("total");
                 //Se genera el código para el servicio, iniciando con "SE0" + el número de turno
                 codigo += "SE00" + String.valueOf(numerodeTurno+1);
+                
+                /*
+                int nventanilla;
+                String ventanillaServicio = "SELECT v.ventanilla FROM ventanilla v INNER JOIN servicio s ON v.idservicio = s.id WHERE s.id=?";
+                this.consultaVentanilla = this.conexion.prepareCall(ventanillaServicio);
+                this.consultaVentanilla.setInt(1, seleccion);
+                this.ventanilla = this.consultaVentanilla.executeQuery();
+                this.ventanilla.next();
+                nventanilla = this.ventanilla.getInt("ventanilla");
+                */
                 
                 //==================== Consulta insert ==================== 
                 String sql = "INSERT INTO `turno` (tipo_de_atencion, servicio_id, codigo) VALUES (?, ?, ?)"; 
@@ -105,9 +115,8 @@ public class TurnoConsultas extends Conexion {
                 return false;
             }
 
-        }catch (Exception ex){
+        }catch (SQLException ex){
             System.out.println("Error en la base de datos.");
-            ex.printStackTrace();
             return false;
         }
     }

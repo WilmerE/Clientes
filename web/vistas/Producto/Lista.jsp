@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="conexiontent-Type" conexiontent="text/html; charset=UTF-8">
-        <title>Servicios</title>
+        <title>Productos</title>
         <%@include file="/css/headlib.jsp" %>
     </head>
     <body>

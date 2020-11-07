@@ -1,0 +1,108 @@
+create database sct;
+use sc;
+
+CREATE TABLE producto(
+    id int not null AUTO_INCREMENT PRIMARY KEY,
+    nombre varchar(50) NOT NULL,
+    codigo varchar(20) NOT NULL UNIQUE
+)
+
+CREATE TABLE servicio(
+    id int not null AUTO_INCREMENT PRIMARY KEY,
+    nombre varchar(50) NOT NULL,
+    codigo varchar(20) NOT NULL UNIQUE
+)
+
+CREATE TABLE cliente(
+    id int not null AUTO_INCREMENT PRIMARY KEY,
+    nombres varchar(50) NOT NULL,
+    apellidos varchar(50) NOT NULL,
+    dpi varchar(15) NOT NULL,
+    telefono varchar(12) NOT NULL,
+    direccion varchar(50) NOT NULL
+)
+
+INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Servicio1', 'S001');
+INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Servicio2', 'S002');
+INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Servicio3', 'S003');
+INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Servicio4', 'S004');
+INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Servicio5', 'S005');
+INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Servicio6', 'S006');
+INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Servicio7', 'S007');
+INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Servicio8', 'S008');
+INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Servicio9', 'S009');
+
+INSERT INTO `producto` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Product1', 'P001');
+INSERT INTO `producto` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Product2', 'P002');
+INSERT INTO `producto` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Product3', 'P003');
+INSERT INTO `producto` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Product4', 'P004');
+INSERT INTO `producto` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Product5', 'P005');
+INSERT INTO `producto` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Product6', 'P006');
+INSERT INTO `producto` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Product7', 'P007');
+INSERT INTO `producto` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Product8', 'P008');
+INSERT INTO `producto` (`id`, `nombre`, `codigo`) VALUES (NULL, 'Product9', 'P009');
+
+INSERT INTO `cliente` (`id`, `nombres`, `apellidos`, `dpi`, `telefono`, `direccion`) VALUES (NULL, 'Wilmer Eulices', 'Pelicó Amador', '3362 44657 1904', '47620050', 'Gualán');
+INSERT INTO `cliente` (`id`, `nombres`, `apellidos`, `dpi`, `telefono`, `direccion`) VALUES (NULL, 'Ingrid Yamileth', 'López Agustín', '3362 44565 4365', '47620050', 'Gualán');
+INSERT INTO `cliente` (`id`, `nombres`, `apellidos`, `dpi`, `telefono`, `direccion`) VALUES (NULL, 'Nelson Jacobo', 'Brenes Calderón', '3362 44123 1123', '47620050', 'Gualán');
+INSERT INTO `cliente` (`id`, `nombres`, `apellidos`, `dpi`, `telefono`, `direccion`) VALUES (NULL, 'César Agusto', 'Lemus Villafuerte', '3362 44321 1321', '47620050', 'Gualán');
+INSERT INTO `cliente` (`id`, `nombres`, `apellidos`, `dpi`, `telefono`, `direccion`) VALUES (NULL, 'Joseph Emmanuel', 'Velasquez Godoy', '3362 44536 1967', '47620050', 'Gualán');
+INSERT INTO `cliente` (`id`, `nombres`, `apellidos`, `dpi`, `telefono`, `direccion`) VALUES (NULL, 'Claudia María', 'Vargas Flores', '3362 44657 2090', '47620050', 'Chiquimula'),
+INSERT INTO `cliente` (`id`, `nombres`, `apellidos`, `dpi`, `telefono`, `direccion`) VALUES (NULL, 'José Willian Junior', 'Hernández Ramírez', '3362 44657 9089', '47620050', 'Chiquimula');
+
+//================================= TURNOS =================================
+
+CREATE TABLE turno(
+    id int not null AUTO_INCREMENT PRIMARY KEY,
+    tipo_de_atencion varchar(8) NOT NULL,
+    producto_id int,
+    servicio_id int,
+    codigo varchar(10) NOT NULL UNIQUE,
+    CONSTRAINT FK_Producto FOREIGN KEY(`producto_id`) REFERENCES `producto`(`id`),
+    CONSTRAINT FK_Servicio FOREIGN KEY(`servicio_id`) REFERENCES `servicio`(`id`)
+)
+
+ALTER TABLE `turno` ADD `estado` VARCHAR(15) NOT NULL DEFAULT 'cola' AFTER `codigo`;
+
+UPDATE `turno` SET `estado` = 'atendido' WHERE `turno`.`id` = 7;
+SELECT s.nombre AS Ventanilla FROM ventanilla v INNER JOIN servicio s ON v.idservicio = s.id WHERE s.id=1;
+
+SELECT COUNT(*) AS total FROM `turno` WHERE tipo_de_atencion='producto';
+SELECT COUNT(*) AS total FROM `turno` WHERE tipo_de_atencion='servicio';
+
+//================================= X SERVICIO =================================
+SELECT t.id AS 'id', t.tipo_de_atencion AS 'Tipo de Atención', s.nombre AS 'Producto Solicitado', t.codigo AS 'Turno', t.estado FROM turno t
+	INNER JOIN servicio s ON t.servicio_id = s.id
+	WHERE t.estado='cola'
+
+//================================= X PRODUCTO =================================
+SELECT t.id AS 'id', t.tipo_de_atencion AS 'Tipo de Atención', p.nombre AS 'Producto Solicitado', t.codigo AS 'Turno', t.estado FROM turno t
+	INNER JOIN producto p ON t.producto_id = p.id
+	WHERE t.estado='cola'
+
+//=========================================== TODOS ==============================================
+SELECT turno.id AS 'id', turno.tipo_de_atencion AS 'Atención', producto.nombre AS 'Solicitud', turno.codigo AS 'Turno'
+	FROM turno
+	INNER JOIN producto ON turno.producto_id = producto.id
+	WHERE turno.estado = 'cola'
+	UNION ALL SELECT turno.id AS 'id', turno.tipo_de_atencion AS 'Tipo de Atención', servicio.nombre AS 'Solicitud', turno.codigo AS 'Turno'
+	FROM turno
+	INNER JOIN servicio ON turno.servicio_id = servicio.id
+	WHERE turno.estado = 'cola'
+//======================================== VENTANILLA ===========================================
+CREATE TABLE `ventanilla` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  	`ventanilla` int(11) NOT NULL,
+  	`idservicio` int(11) DEFAULT NULL,
+  	`idproducto` int(11) DEFAULT NULL,
+	CONSTRAINT FK_ProductoV FOREIGN KEY(`idproducto`) REFERENCES `producto`(`id`),
+    	CONSTRAINT FK_ServicioV FOREIGN KEY(`idservicio`) REFERENCES `servicio`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `ventanilla`(`ventanilla`, `idservicio`) VALUES (1,1), (2,2), (3,3), (4,4), (5,5), (6,6), (7,7), (8,8), (9,9), (10,10);
+INSERT INTO `ventanilla`(`ventanilla`, `idproducto`) VALUES (1,1), (2,2), (3,3), (4,4), (5,5), (6,6), (7,7), (8,8), (9,9), (10,10)
+
+ALTER TABLE `ventanilla`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `servicio` (`idservicio`),
+  ADD KEY `producto` (`idproducto`);

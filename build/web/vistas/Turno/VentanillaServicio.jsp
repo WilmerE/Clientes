@@ -16,13 +16,14 @@
     <body>
         <aside>
             <div class="turnos">
-                <h1>Turnos de productos: </h1>
+                <h1>Turnos de servicio: </h1>
                 <ul class="list-group">
                     
                 </ul>
             </div>
         </aside>
         <section>
+            
         </section>
         <%@include file="/js/scripts.jsp" %>
         <script>

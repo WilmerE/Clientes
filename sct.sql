@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2020 a las 05:49:03
+-- Tiempo de generación: 07-11-2020 a las 20:08:33
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.8
 
@@ -113,9 +113,64 @@ INSERT INTO `servicio` (`id`, `nombre`, `codigo`) VALUES
 
 CREATE TABLE `turno` (
   `id` int(11) NOT NULL,
-  `tipo_de_servicio` varchar(8) NOT NULL,
-  `codigo` varchar(10) NOT NULL
+  `tipo_de_atencion` varchar(8) NOT NULL,
+  `producto_id` int(11) DEFAULT NULL,
+  `servicio_id` int(11) DEFAULT NULL,
+  `codigo` varchar(10) NOT NULL,
+  `estado` varchar(15) NOT NULL DEFAULT 'cola'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `turno`
+--
+
+INSERT INTO `turno` (`id`, `tipo_de_atencion`, `producto_id`, `servicio_id`, `codigo`, `estado`) VALUES
+(10, 'servicio', NULL, 1, 'SE001', 'cola'),
+(11, 'servicio', NULL, 2, 'SE002', 'cola'),
+(12, 'servicio', NULL, 3, 'SE003', 'cola'),
+(13, 'servicio', NULL, 4, 'SE004', 'cola'),
+(14, 'producto', 1, NULL, 'PR001', 'cola'),
+(15, 'producto', 2, NULL, 'PR002', 'cola'),
+(16, 'producto', 3, NULL, 'PR003', 'cola');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventanilla`
+--
+
+CREATE TABLE `ventanilla` (
+  `id` int(11) NOT NULL,
+  `ventanilla` int(11) NOT NULL,
+  `idservicio` int(11) DEFAULT NULL,
+  `idproducto` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ventanilla`
+--
+
+INSERT INTO `ventanilla` (`id`, `ventanilla`, `idservicio`, `idproducto`) VALUES
+(7, 1, 1, NULL),
+(8, 2, 2, NULL),
+(9, 3, 3, NULL),
+(10, 4, 4, NULL),
+(11, 5, 5, NULL),
+(12, 6, 6, NULL),
+(13, 7, 7, NULL),
+(14, 8, 8, NULL),
+(15, 9, 9, NULL),
+(16, 10, 10, NULL),
+(17, 1, NULL, 1),
+(18, 2, NULL, 2),
+(19, 3, NULL, 3),
+(20, 4, NULL, 4),
+(21, 5, NULL, 5),
+(22, 6, NULL, 6),
+(23, 7, NULL, 7),
+(24, 8, NULL, 8),
+(25, 9, NULL, 9),
+(26, 10, NULL, 10);
 
 --
 -- Índices para tablas volcadas
@@ -146,7 +201,17 @@ ALTER TABLE `servicio`
 --
 ALTER TABLE `turno`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `codigo` (`codigo`);
+  ADD UNIQUE KEY `codigo` (`codigo`),
+  ADD KEY `FK_Producto` (`producto_id`),
+  ADD KEY `FK_Servicio` (`servicio_id`);
+
+--
+-- Indices de la tabla `ventanilla`
+--
+ALTER TABLE `ventanilla`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_ProductoV` (`idproducto`),
+  ADD KEY `FK_ServicioV` (`idservicio`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -174,7 +239,31 @@ ALTER TABLE `servicio`
 -- AUTO_INCREMENT de la tabla `turno`
 --
 ALTER TABLE `turno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de la tabla `ventanilla`
+--
+ALTER TABLE `ventanilla`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `turno`
+--
+ALTER TABLE `turno`
+  ADD CONSTRAINT `FK_Producto` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`),
+  ADD CONSTRAINT `FK_Servicio` FOREIGN KEY (`servicio_id`) REFERENCES `servicio` (`id`);
+
+--
+-- Filtros para la tabla `ventanilla`
+--
+ALTER TABLE `ventanilla`
+  ADD CONSTRAINT `FK_ProductoV` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`id`),
+  ADD CONSTRAINT `FK_ServicioV` FOREIGN KEY (`idservicio`) REFERENCES `servicio` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
