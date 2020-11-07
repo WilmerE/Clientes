@@ -41,17 +41,15 @@ public class TurnoView extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         StringBuffer data = null;
-        
         try (PrintWriter out = response.getWriter()) {
-            TurnoConsultas conexion = new TurnoConsultas();
             
-            this.rs = conexion.PrductoTurnos();
-            
+            TurnoConsultas conexion = new TurnoConsultas(); 
+            this.rs = conexion.TurnosenCola();
             String turnos_json = "{ \"turnos\": ["; 
             
             try {
                 while(this.rs.next()){
-                    turnos_json += " { \"atencion\": \" "+ this.rs.getString("Atención") +" \", \"solicitud\": \" "+ this.rs.getString("Solicitud") +" \", \"turno\": \" "+ this.rs.getString("Turno") +" \"  } ";
+                    turnos_json += " { \"atencion\": \" "+ this.rs.getString("Atención") +" \", \"solicitud\": \" "+ this.rs.getString("Solicitud") +" \", \"turno\": \" "+ this.rs.getString("Turno") +" \" } ";
                     if (!this.rs.isAfterLast()) {
                         turnos_json += ",";
                     }

@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 7/11/2020, 08:26:03 AM
+    Author     : WPelico
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+aside{
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+section{
+    float: right;
+    width: 75%;
+}
+.btn{
+    padding: 0.1rem 0.4rem;
+    color: #fff;
+    background-color: green;
+}

@@ -16,7 +16,6 @@ import java.sql.SQLException;
  */
 public class TurnoConsultas extends Conexion {
     
-    private String turno="";
     private Connection conexion;
     private PreparedStatement pstm;
     private ResultSet rs;
@@ -112,12 +111,13 @@ public class TurnoConsultas extends Conexion {
             return false;
         }
     }
-    public ResultSet PrductoTurnos(){
+    public ResultSet TurnosenCola(){
         try {
             String sql = "SELECT turno.id AS 'id', UCASE(turno.tipo_de_atencion) AS 'Atención', producto.nombre AS 'Solicitud', turno.codigo AS 'Turno' "
-                    +"FROM turno INNER JOIN producto ON turno.producto_id = producto.id "
-                    +"UNION ALL SELECT turno.id AS 'id', UCASE(turno.tipo_de_atencion) AS 'Tipo de Atención', servicio.nombre AS 'Servicio Solicitado', turno.codigo AS 'Turno' "
-                    +"FROM turno INNER JOIN servicio ON turno.servicio_id = servicio.id "
+                    + "FROM turno INNER JOIN producto ON turno.producto_id = producto.id "
+                    + "WHERE turno.estado = 'cola' "
+                    + "UNION ALL SELECT turno.id AS 'id', UCASE(turno.tipo_de_atencion) AS 'Tipo de Atención', servicio.nombre AS 'Solicitud', turno.codigo AS 'Turno' "
+                    + "FROM turno INNER JOIN servicio ON turno.servicio_id = servicio.id "
                     + "WHERE turno.estado='cola'";
 
             this.pstm = getConexion().prepareStatement(sql);
@@ -128,6 +128,53 @@ public class TurnoConsultas extends Conexion {
             System.out.println("ERROR EN CONSULTA " + e);
         }
         return null;
+    }
+    public ResultSet TurnosProducto(){
+        try {
+            String sql = "SELECT t.id AS 'id', t.tipo_de_atencion AS 'Tipo de Atención', p.nombre AS 'Producto', t.codigo AS 'Turno', t.estado "
+                    + "FROM turno t "
+                    + "INNER JOIN producto p ON t.producto_id = p.id "
+                    + "WHERE t.estado='cola'";
+
+            this.pstm = getConexion().prepareStatement(sql);
+            this.rs = this.pstm.executeQuery();
+            
+            return this.rs;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+        return null;
+    }
+    public ResultSet TurnosServicio(){
+        try {
+            String sql = "SELECT t.id AS 'id', t.tipo_de_atencion AS 'Tipo de Atención', s.nombre AS 'Producto', t.codigo AS 'Turno', t.estado "
+                    + "FROM turno t "
+                    + "INNER JOIN servicio s ON t.servicio_id = s.id "
+                    + "WHERE t.estado='cola'";
+
+            this.pstm = getConexion().prepareStatement(sql);
+            this.rs = this.pstm.executeQuery();
+            
+            return this.rs;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+        return null;
+    }
+    public boolean TurnoAtendido(int id){
+        try {
+            this.conexion = getConexion();
+            String sql = "UPDATE `turno` SET `estado` = 'atendido' "
+                    + "WHERE `turno`.`id` = ? ";
+            this.pstm = this.conexion.prepareStatement(sql);
+            this.pstm.setInt(1, id);
+            
+            this.pstm.executeUpdate();
+            return true;
+         } catch (SQLException e) {
+            System.out.println("ERROR EN LA CONSULTA UPDATE" + e);
+        }
+         return false;
     }
     public void desconectar() {
 

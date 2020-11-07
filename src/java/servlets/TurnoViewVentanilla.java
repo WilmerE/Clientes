@@ -7,18 +7,25 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lib.TurnoConsultas;
 
 /**
  *
  * @author WPelico
  */
-@WebServlet(name = "TurnoCall", urlPatterns = {"/TurnoCall"})
-public class TurnoCall extends HttpServlet {
+@WebServlet(name = "TurnoViewVentanilla", urlPatterns = {"/TurnoViewVentanilla"})
+public class TurnoViewVentanilla extends HttpServlet {
+    
+    private ResultSet rs;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +39,29 @@ public class TurnoCall extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        StringBuffer data = null;
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TurnoCall</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TurnoCall at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            TurnoConsultas conexion = new TurnoConsultas(); 
+            this.rs = conexion.TurnosProducto();
+            String turnos_json = "{ \"turnos\": ["; 
+            
+            try {
+                while(this.rs.next()){
+                    turnos_json += " { \"producto\": \" "+ this.rs.getString("Producto") +" \", \"turno\": \" "+ this.rs.getString("Turno") +" \", \"id\": \""+this.rs.getInt("id")+"\" } ";
+                    if (!this.rs.isAfterLast()) {
+                        turnos_json += ",";
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(TurnoView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            turnos_json += "]}";
+            conexion.desconectar();
+            data = new StringBuffer(turnos_json);
+            response.getWriter().write(data.toString());
         }
     }
 

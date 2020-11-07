@@ -61,9 +61,6 @@
             window.setInterval(function(){
                 llamar_turno();
             }, 10000);
-            
-            const button = document.querySelector("button");
-            button.addEventListener('click', playSound);
                 
             function llamar_turno(){
                 $.ajax(
@@ -74,11 +71,12 @@
                     
                     $(".list-group").empty();
                     $.each(data, function( index, value ) {
-                        let row = "<li class=\"list-group-item\">" + value.atencion +" --- Turno: " + value.turno +" </li>";
+                        let row = "<li class=\"list-group-item\">" + value.atencion +" --- Turno: <b>" + value.turno +"</b></li>";
                         $(".list-group").append(row);
                     });
                     turnos = data;
                 }).fail(function(jqXHR) {
+                    //Ver estado en consola
                     console.log(jqXHR.statusText);
                 });
             }
