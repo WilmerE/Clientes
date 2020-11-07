@@ -35,14 +35,14 @@
                 
             function llamar_turno(){
                 $.ajax(
-                        '/Clientes/TurnoViewVentanilla'
+                        '/Clientes/TurnoViewServicio'
                 ).done(function(data) {
                     data = data.replace(",]", "]");
                     data = JSON.parse(data).turnos;
                     
                     $(".list-group").empty();
                     $.each(data, function( index, value ) {
-                        let row = "<li class=\"list-group-item\">" + value.producto +" --- Turno: <b>" + value.turno +"</b><a href=\"Atendido.jsp?id="+value.id+"\" class=\"btn\">Atendido</a></li>";
+                        let row = "<li class=\"list-group-item\">" + value.servicio +" --- Turno: <b>" + value.turno +"</b><a href=\"Atendido.jsp?id="+value.id+"\" class=\"btn\">Atendido</a></li>";
                         $(".list-group").append(row);
                     });
                     turnos = data;

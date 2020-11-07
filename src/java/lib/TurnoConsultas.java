@@ -147,7 +147,7 @@ public class TurnoConsultas extends Conexion {
     }
     public ResultSet TurnosServicio(){
         try {
-            String sql = "SELECT t.id AS 'id', t.tipo_de_atencion AS 'Tipo de Atención', s.nombre AS 'Producto', t.codigo AS 'Turno', t.estado "
+            String sql = "SELECT t.id AS 'id', t.tipo_de_atencion AS 'Tipo de Atención', s.nombre AS 'Servicio', t.codigo AS 'Turno', t.estado "
                     + "FROM turno t "
                     + "INNER JOIN servicio s ON t.servicio_id = s.id "
                     + "WHERE t.estado='cola'";
