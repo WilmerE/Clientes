@@ -27,6 +27,9 @@ section{
     width: 50%;
     height: 100%;
 }
+.turnos{
+    margin: 1rem 8% 0;
+}
 aside {
     float: right;
     width: 50%;
@@ -75,7 +78,7 @@ aside {
     font-size: 2rem;
 }
 footer{
-    position: absolute;
+    position: fixed;
     color: #fff;
     background-color: #2F3233;
     bottom: 0%

@@ -51,7 +51,7 @@ public class TurnoView extends HttpServlet {
             
             try {
                 while(this.rs.next()){
-                    turnos_json += " { \"atencion\": \" "+ this.rs.getString("Atención") +" \", \"producto\": \" "+ this.rs.getString("Solicitud") +" \", \"turno\": \" "+ this.rs.getString("Turno") +" \"  } ";
+                    turnos_json += " { \"atencion\": \" "+ this.rs.getString("Atención") +" \", \"solicitud\": \" "+ this.rs.getString("Solicitud") +" \", \"turno\": \" "+ this.rs.getString("Turno") +" \"  } ";
                     if (!this.rs.isAfterLast()) {
                         turnos_json += ",";
                     }

@@ -18,11 +18,11 @@
             <img src="../../img/electrocomp-mono.png" width="30%" class="logo">
         </div>
         <section>
-            <h1>Turnos de Productos: </h1>
-            <div>
+            <div class="turnos">
+                <h1>Turnos en cola: </h1>
                 <ul class="list-group">
                     
-                </ul> 
+                </ul>
             </div>
         </section>
         <aside class="contenedor">
@@ -74,7 +74,7 @@
                     
                     $(".list-group").empty();
                     $.each(data, function( index, value ) {
-                        let row = "<li class=\"list-group-item\"> Turno: " + value.turno +" </li>";
+                        let row = "<li class=\"list-group-item\">" + value.atencion +" --- Turno: " + value.turno +" </li>";
                         $(".list-group").append(row);
                     });
                     turnos = data;
