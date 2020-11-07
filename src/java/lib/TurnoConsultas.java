@@ -114,10 +114,10 @@ public class TurnoConsultas extends Conexion {
     }
     public ResultSet PrductoTurnos(){
         try {
-            String sql = "SELECT turno.tipo_de_atencion AS 'Atención', "
-                    + "producto.nombre AS 'Producto', "
-                    + "turno.codigo AS 'Turno' FROM producto "
-                    + "INNER JOIN turno ON producto.id = turno.producto_id";
+            String sql = "SELECT turno.id AS 'id', turno.tipo_de_atencion AS 'Atención', producto.nombre AS 'Solicitud', turno.codigo AS 'Turno' "
+                    +"FROM turno INNER JOIN producto ON turno.producto_id = producto.id "
+                    +"UNION ALL SELECT turno.id AS 'id', turno.tipo_de_atencion AS 'Tipo de Atención', servicio.nombre AS 'Servicio Solicitado', turno.codigo AS 'Turno' "
+                    +"FROM turno INNER JOIN servicio ON turno.servicio_id = servicio.id";
 
             this.pstm = getConexion().prepareStatement(sql);
             this.rs = this.pstm.executeQuery();
